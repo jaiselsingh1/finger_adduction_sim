@@ -1,7 +1,7 @@
 """
 Four-Finger Hand Kinematics - Adduction Motion Simulation
 MECE4602 - Introduction to Robotics, Project 2
-Authors: Dilara Baysal, Jaisel Singh, Laura Xing, Lorenzo De Sanctis
+Authors: Jaisel Singh, Dilara Baysal, Laura Xing, Lorenzo De Sanctis
 """
 
 import numpy as np
@@ -179,10 +179,7 @@ def compute_joint_torques(angles: JointAngles, geom: FingerGeometry, F_ee: np.nd
     Jv = finger_Jacobian_global(angles, geom)
     return Jv.T @ F_ee
 
-
-# --------------------------------------------------------------------------
-# NEW: generate_adduction_trajectory with X/Z–aligned final fingertips
-# --------------------------------------------------------------------------
+# generate_adduction_trajectory with X/Z–aligned final fingertips
 def generate_adduction_trajectory(fingers: List[FingerGeometry],
                                    n_frames: int,
                                    theta2_initial: float,
@@ -216,9 +213,7 @@ def generate_adduction_trajectory(fingers: List[FingerGeometry],
 
     t = np.linspace(0.0, 1.0, n_frames)
 
-    # --------------------------------------------------------------
     # 1) Reference fingertip X/Z from the middle finger's final pose
-    # --------------------------------------------------------------
     middle_geom = next((g for g in fingers if g.name == "Middle"), fingers[0])
     theta1_mid_initial = theta1_splay.get("Middle", 0.0)
     theta1_mid_final = theta1_mid_initial * 0.0  # -> 0 rad
@@ -226,9 +221,7 @@ def generate_adduction_trajectory(fingers: List[FingerGeometry],
     ref_pos, _, _ = finger_FK_global(ref_angles, middle_geom)
     target_x, target_z = float(ref_pos[0]), float(ref_pos[2])
 
-    # --------------------------------------------------------------
     # 2) Per-finger flexion targets so tips share (target_x, target_z)
-    # --------------------------------------------------------------
     for geom in fingers:
         finger_data = {
             'angles': [],
