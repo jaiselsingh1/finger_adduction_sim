@@ -1,0 +1,12 @@
+[project]
+name = "final-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.10.7",
+    "numpy>=2.3.5",
+    "scipy>=1.16.3",
+    "sympy>=1.14.0",
+]
